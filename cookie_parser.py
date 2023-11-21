@@ -1,8 +1,9 @@
 import csv
 import argparse
+import sys
 
 
-def main():
+def main(argv=None):
 
     parser = argparse.ArgumentParser(description='finds the most common cookie for a given date')
 
@@ -11,7 +12,7 @@ def main():
     parser.add_argument('-d', '--date', help='date specified for cookie search')
     
     # Parse the command-line arguments
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     # Access the parsed arguments
     input_file = args.input_file
@@ -21,7 +22,7 @@ def main():
    
     print(res)
    
-    return 0
+    sys.exit(0)
 
 def most_common_cookie(input_file, date) -> str:
     """
