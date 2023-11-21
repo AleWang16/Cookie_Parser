@@ -1,22 +1,28 @@
 from cookie_parser import most_common_cookie
 import csv
 
-def empty_sheet():
-    s = most_common_cookie(empty.csv)
-    assert(s == "")
+def empty_sheet(capsys):
+    assert cookie_parser.main(['empty.csv', '2019-12-09'])
+    
+    out, err = capsys.readouterr()
+    assert out == ""
 
-def empty_string():
-    s = most_common_cookie()
+def empty_string(capsys):
+    assert cookie_parser.main(['cookies.csv', '2019-12-07'])
+    out, err = capsys.readouterr()
 
-def one_cookie():
-    pass 
+    assert out == ""
+    
 
-def various_cookies():
-    pass
+def one_cookie(capsys):
+    assert cookie_parser.main(['cookies.csv', '2019-12-09']) 
+    out, err = capsys.readouterr()
+    assert out == "D\n"
 
-def various_dates():
-    pass
-
+def various_cookies(capsys):
+    assert cookie_parser.main(['cookies.csv', '2019-12-08'])
+    out, err = capsys.readouterr()
+    assert out == "A\nC\nD\n"
 
 
 def main():
@@ -24,7 +30,6 @@ def main():
     empty_string()
     one_cookie()
     various_cookies()
-    various_dates()
 
 
 if __name__ == '__main__':
